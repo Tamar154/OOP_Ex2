@@ -63,7 +63,7 @@ public class DirectedWeightedGraphAlgorithmsImpl implements DirectedWeightedGrap
 
         for (int i = 0; i < n; i++) {
             boolean[] visited = new boolean[n];
-            DFS(adjList, n, visited);
+            DFS(adjList, i, visited);
             for (boolean b : visited) {
                 if (!b) {
                     return false;
