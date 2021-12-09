@@ -16,16 +16,14 @@ class DirectedWeightedGraphAlgorithmsImplTest {
     api.DirectedWeightedGraphAlgorithmsImpl g1 = new DirectedWeightedGraphAlgorithmsImpl();
     api.DirectedWeightedGraphAlgorithmsImpl g2 = new DirectedWeightedGraphAlgorithmsImpl();
     api.DirectedWeightedGraphAlgorithmsImpl g3 = new DirectedWeightedGraphAlgorithmsImpl();
-    api.DirectedWeightedGraphAlgorithmsImpl g4 = new DirectedWeightedGraphAlgorithmsImpl();
-    api.DirectedWeightedGraphAlgorithmsImpl g5 = new DirectedWeightedGraphAlgorithmsImpl();
+
 
 
     public DirectedWeightedGraphAlgorithmsImplTest() {
         g1.load("data\\G1.json");
         g2.load("data\\G2.json");
         g3.load("data\\G3.json");
-        g4.load("aa.json");
-        g5.load("dist.json");
+
 
 
     }
@@ -71,8 +69,6 @@ class DirectedWeightedGraphAlgorithmsImplTest {
 
     @Test
     void shortestPathDist() {
-        assertEquals(2, g5.shortestPathDist(0, 1));
-        assertEquals(18, g5.shortestPathDist(3, 2));
         assertEquals(5.836343, g1.shortestPathDist(0, 13));
     }
 
