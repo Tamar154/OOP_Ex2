@@ -2,8 +2,6 @@ import api.DirectedWeightedGraph;
 import api.DirectedWeightedGraphAlgorithms;
 import api.DirectedWeightedGraphAlgorithmsImpl;
 
-import javax.swing.*;
-
 /**
  * This class is the main class for Ex2 - your implementation will be tested using this class.
  */
@@ -46,30 +44,29 @@ public class Ex2 {
      * @param json_file - a json file (e.g., G1.json - G3.gson)
      */
     public static void runGUI(String json_file) {
-        DirectedWeightedGraphAlgorithms alg = getGrapgAlgo(json_file);
         // ****** Add your code here ******
         //
         // ********************************
-        JFrame frame = new JFrame(); //creates a frame
-        frame.setTitle("OOP Recitation 7 "); //sets title of frame
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //exit from application
-        frame.setResizable(false); //prevent frame from being resized
-        frame.setSize(420, 420); //sets the x-dimension, and y-dimension of frame
-        frame.setVisible(true); //make frame visible
+//        JFrame frame = new JFrame(); //creates a frame
+//        frame.setTitle("Ex2"); //sets title of frame
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //exit from application
+//        frame.setResizable(false); //prevent frame from being resized
+//        frame.setSize(500, 500); //sets the x-dimension, and y-dimension of frame
+//        frame.setVisible(true); //make frame visible
 //        JMenuBar menuBar = new JMenuBar();
 //        frame.setJMenuBar(menuBar);
-
-        JButton b = new JButton("click here");
-        b.setBounds(50,100,95,30);
-        frame.add(b);
-        frame.setSize(400,400);
-        frame.setLayout(null);
-        frame.setVisible(true);
-
-
+        DirectedWeightedGraphAlgorithms alg = new DirectedWeightedGraphAlgorithmsImpl();
+        alg=getGrapgAlgo(json_file);
+        MyFrame myFrame=new MyFrame(alg);
+        myFrame.setVisible(true);
     }
 
     public static void main(String[] args) {
-        runGUI("C:\\Users\\TamarD\\IdeaProjects\\Ex2\\data\\G1.json");
+        runGUI("data\\G1.json");
+
+
     }
+
 }
+
+
