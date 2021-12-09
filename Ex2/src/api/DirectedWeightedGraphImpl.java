@@ -3,14 +3,13 @@ package api;
 import java.util.*;
 
 public class DirectedWeightedGraphImpl implements DirectedWeightedGraph {
-    //    HashMap<Integer, String> hm = new HashMap<Integer, String>();
     public HashMap<Integer, HashMap<Integer, EdgeData>> Edges; // <src, <dst, edge>>
     public HashMap<Integer, NodeData> Nodes;
 
 
     public DirectedWeightedGraphImpl() {
-        Edges = new HashMap<Integer, HashMap<Integer, EdgeData>>();
-        Nodes = new HashMap<Integer, NodeData>();
+        Edges = new HashMap<>();
+        Nodes = new HashMap<>();
 
     }
 
@@ -33,7 +32,7 @@ public class DirectedWeightedGraphImpl implements DirectedWeightedGraph {
     public void connect(int src, int dest, double w) {
         if (Nodes.containsKey(src) && Nodes.containsKey(dest)) {
             EdgeDataImpl edge = new EdgeDataImpl(src, w, dest);
-            HashMap<Integer, EdgeData> temp = new HashMap<Integer, EdgeData>();
+            HashMap<Integer, EdgeData> temp = new HashMap<>();
             temp.put(dest, edge);
             if (Edges.containsKey(src))
                 Edges.get(src).put(dest, edge);
@@ -60,14 +59,12 @@ public class DirectedWeightedGraphImpl implements DirectedWeightedGraph {
         return ans;
     }
 
-    //    This method returns an Iterator for edges getting out of the given node (all the edges starting (source) at the given node).
     @Override
     public Iterator<EdgeData> edgeIter(int node_id) { // **** check about runtime exception ****
         HashMap<Integer, EdgeData> temp = Edges.get(node_id);
         return temp.values().iterator();
     }
-
-    // HashMap<Integer, HashMap<Integer, EdgeData>> edgeMap; // <src, <dst, edge>>
+    
     @Override
     public NodeData removeNode(int key) {
         NodeData ans = Nodes.get(key);
