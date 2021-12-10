@@ -7,24 +7,28 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
-import java.io.IOException;
 
 public class MyFrame extends JFrame implements ActionListener, MouseListener {
     private DirectedWeightedGraphAlgorithms alg;
-    private MenuItem menuItem1;
-    private MenuItem menuItem2;
-    private MenuItem AlgoFunc1;
-    private MenuItem AlgoFunc2;
-    private MenuItem AlgoFunc3;
-    private MenuItem AlgoFunc4;
-    private MenuItem AlgoFunc5;
+    private MenuItem Save;
+    private MenuItem Load;
+    private MenuItem TSP;
+    private MenuItem center;
+    private MenuItem isConnected;
+    private MenuItem ShortestPathDist;
+    private MenuItem ShortestPath;
     private JLabel txt;
 
+    private void initPanel () {
+        JPanel mp = new MyPanel(alg);
+        mp.setBackground(Color.white);
+        this.add(mp);
+    }
     public MyFrame(DirectedWeightedGraphAlgorithms alg) {
         this.alg = alg;
         BuildFrame();
         addMenu();
-//    initPanel();
+        initPanel();
         this.addMouseListener(this);
 
     }
@@ -45,59 +49,52 @@ public class MyFrame extends JFrame implements ActionListener, MouseListener {
         Draw.addActionListener(this);
         menuBar.add((Draw));
         this.setMenuBar(menuBar);
-        menuItem1 = new MenuItem(("Save"));
-        menuItem2 = new MenuItem(("Load"));
-        menuItem1.addActionListener(this);
-        menuItem2.addActionListener(this);
-        menu.add(menuItem1);
-        menu.add(menuItem2);
-        AlgoFunc1 = new MenuItem(("TSP"));
-        AlgoFunc2 = new MenuItem(("Center"));
-        AlgoFunc3 = new MenuItem(("isConnected"));
-        AlgoFunc4 = new MenuItem(("shortestPathDist"));
-        AlgoFunc5 = new MenuItem(("shortestPath"));
-        AlgoFunc1.addActionListener(this);
-        AlgoFunc2.addActionListener(this);
-        AlgoFunc3.addActionListener(this);
-        AlgoFunc4.addActionListener(this);
-        AlgoFunc5.addActionListener(this);
-        Algo.add(AlgoFunc1);
-        Algo.add(AlgoFunc2);
-        Algo.add(AlgoFunc3);
-        Algo.add(AlgoFunc4);
-        Algo.add(AlgoFunc5);
-        txt = new JLabel("The answer will be here!");
-        txt.setBounds(250, 100, 100, 100);
-        this.add(txt);
+        Save = new MenuItem(("Save"));
+        Load = new MenuItem(("Load"));
+        Save.addActionListener(this);
+        Load.addActionListener(this);
+        menu.add(Save);
+        menu.add(Load);
+        TSP = new MenuItem(("TSP"));
+        center = new MenuItem(("Center"));
+        isConnected = new MenuItem(("isConnected"));
+        ShortestPathDist = new MenuItem(("shortestPathDist"));
+        ShortestPath = new MenuItem(("shortestPath"));
+        TSP.addActionListener(this);
+        center.addActionListener(this);
+        isConnected.addActionListener(this);
+        ShortestPathDist.addActionListener(this);
+        ShortestPath.addActionListener(this);
+        Algo.add(TSP);
+        Algo.add(center);
+        Algo.add(isConnected);
+        Algo.add(ShortestPathDist);
+        Algo.add(ShortestPath);
+//        txt = new JLabel("The answer will be here!");
+//        txt.setBounds(0, 100, 100, 100);
+//        this.add(txt);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-//        if(e.getSource()==AlgoFunc1){
-//            txt.setText(alg.tsp());
-//        }
 
-        if (e.getSource() == AlgoFunc2) {
-            txt.setText(alg.center().toString());
+        if (e.getSource() == center) {
+            JOptionPane.showMessageDialog(this, alg.center().toString());
         }
 
-        if (e.getSource() == AlgoFunc3) {
+        if (e.getSource() == isConnected) {
             Boolean b = alg.isConnected();
-            txt.setText(b.toString());
+            JOptionPane.showMessageDialog(this, b);
         }
-        if (e.getSource() == menuItem2) {
-            try {
-                JFileChooser fileChooser = new JFileChooser();
-                int returnValue = fileChooser.showOpenDialog(null);
-                if (returnValue == JFileChooser.APPROVE_OPTION) {
-                    File selectedFile = fileChooser.getSelectedFile();
-                    Desktop.getDesktop().open(selectedFile);
-//                    java.awt.Desktop.getDesktop().open(selectedFile);
-                    Ex2.getGrapg(selectedFile.toString());
-                }
-
-            } catch (IOException ioe) {
-                System.out.println("Wrong file, please try again!");
+        if (e.getSource() == Load) {
+//            try {
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setCurrentDirectory(new File("C:\\Users\\roey3\\IdeaProjects\\Ex2\\data"));
+            int returnValue = fileChooser.showOpenDialog(null);
+            if (returnValue == JFileChooser.APPROVE_OPTION) {
+                File selectedFile = fileChooser.getSelectedFile();
+                this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+                Ex2.runGUI(selectedFile.toString());
             }
         }
     }
@@ -125,10 +122,6 @@ public class MyFrame extends JFrame implements ActionListener, MouseListener {
         public void mouseExited (MouseEvent e){
 
         }
-        private void initPanel () {
-            JPanel mp = new MyPanel(alg);
-            mp.setBackground(Color.white);
-            this.add(mp);
-        }
     }
+
 
