@@ -21,7 +21,7 @@ public class MyPanel extends JPanel implements MouseListener {
         Iterator<NodeData> iter=alg.getGraph().nodeIter();
         while(iter.hasNext()){
             NodeData tmp=iter.next();
-            g.fillOval((int)tmp.getLocation().x(),(int)tmp.getLocation().y(),100,100);
+            g.fillOval((int)tmp.getLocation().x(),(int)tmp.getLocation().y(),20,20);
         }
         Iterator<EdgeData> iter2= alg.getGraph().edgeIter();
         while(iter2.hasNext()){
