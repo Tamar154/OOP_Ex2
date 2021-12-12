@@ -56,8 +56,9 @@ public class DirectedWeightedGraphAlgorithmsImpl implements DirectedWeightedGrap
         }
         Iterator<EdgeData> iter = g.edgeIter();
         while (iter.hasNext()) {
-            int src = iter.next().getSrc();
-            int dest = iter.next().getDest();
+            EdgeData edge = iter.next();
+            int src = edge.getSrc();
+            int dest = edge.getDest();
             adjList.get(src).add(dest);
         }
 
