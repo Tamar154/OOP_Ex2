@@ -243,7 +243,7 @@ public class DirectedWeightedGraphAlgorithmsImpl implements DirectedWeightedGrap
         while (nodeIter.hasNext()) {
             NodeData temp = nodeIter.next();
             JsonObject node = new JsonObject();
-//            node.addProperty("pos", temp.getLocation().toString());
+            node.addProperty("pos", temp.getLocation().toString());
             node.addProperty("id", temp.getKey());
             Nodes.add(node);
         }
