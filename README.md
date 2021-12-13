@@ -18,6 +18,7 @@ classes:
     - tsp: in this function we also used Floyd Warshall Algorithm.
     - save: saves our graph object into a json file.
     - load: reads a json file and loads it as graph.
+ 
  Algorithm run time tests:
  *Too much time
  G1:Center-2ms, Isconnected-1ms, ShoretstPath-1ms, ShoretstPathDist-1ms, TSP-1ms.
