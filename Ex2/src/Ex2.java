@@ -13,14 +13,13 @@ public class Ex2 {
      * @return
      */
     public static DirectedWeightedGraph getGrapg(String json_file) {
-        DirectedWeightedGraph ans = null;
+
         // ****** Add your code here ******
         //
         // ********************************
         DirectedWeightedGraphAlgorithmsImpl graph = new DirectedWeightedGraphAlgorithmsImpl();
         graph.load(json_file);
-        ans = graph.copy();
-        return ans;
+        return graph.getGraph();
     }
 
     /**
@@ -30,10 +29,10 @@ public class Ex2 {
      * @return
      */
     public static DirectedWeightedGraphAlgorithms getGrapgAlgo(String json_file) {
-        DirectedWeightedGraphAlgorithms ans = new DirectedWeightedGraphAlgorithmsImpl();
         // ****** Add your code here ******
         //
         // ********************************
+        DirectedWeightedGraphAlgorithms ans = new DirectedWeightedGraphAlgorithmsImpl();
         ans.load(json_file);
         return ans;
     }
@@ -62,6 +61,13 @@ public class Ex2 {
     }
 
     public static void main(String[] args) {
+//        DirectedWeightedGraphAlgorithmsImpl alg=new DirectedWeightedGraphAlgorithmsImpl();
+//        alg.load("data\\G1.json");
+//        Iterator<NodeData> iter=alg.getGraph().nodeIter();
+//        while(iter.hasNext()){
+//            System.out.println(iter.next().getLocation().x());
+//            System.out.println(iter.next().getLocation().y());
+//        }
         runGUI("data\\G1.json");
 
     }
