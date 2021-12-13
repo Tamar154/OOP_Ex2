@@ -18,3 +18,12 @@ classes:
     - tsp: in this function we also used Floyd Warshall Algorithm.
     - save: saves our graph object into a json file.
     - load: reads a json file and loads it as graph.
+ Algorithm run time tests:
+ *Too much time
+ G1:Center-2ms, Isconnected-1ms, ShoretstPath-1ms, ShoretstPathDist-1ms, TSP-1ms.
+ G2: Center-3ms, Isconnected-3ms, ShoretstPath-9ms, ShoretstPathDist-5ms, TSP-16ms.
+ G3: Center-5ms, Isconnected-4ms, ShoretstPath-8ms, ShoretstPathDist-6ms, TSP-7ms.
+ 1,000 nodes: Center-3447ms, Isconnected-12ms, ShoretstPath-3769ms, ShoretstPathDist-3350ms, TSP-4128ms.
+ 10,000 nodes: Center- *, Isconnected-23550ms, ShoretstPath-*, ShoretstPathDist-*, TSP-*.
+ 100,000 nodes: Center- *, Isconnected-*, ShoretstPath-*, ShoretstPathDist-*, TSP-*.
+ 1,000,000 nodes: Center- *, Isconnected-*, ShoretstPath-*, ShoretstPathDist-*, TSP-*.
