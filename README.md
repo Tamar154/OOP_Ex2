@@ -37,3 +37,17 @@ classes:
  
  1,000,000 nodes: Center- * , Isconnected- * , ShoretstPath- * , ShoretstPathDist- *, TSP- *.
  
+Running the program will be via Intelliji software or via CMD.
+ 
+To make and design our GUI we used the swing library.
+ 
+Our GUI is  very simple to use. On top left of the program will be our menu bar that has three sections.
+ 
+The first section is File when the user clicks it, it will provide two options to save a file load one or exit the program.
+ 
+The second section is Algorithm when the user clicks it, it will provide five options of algorithms:
+ 
+Center, IsConnected, ShortestPath, ShortestPathDist and TSP.
+ 
+The third section and the last is the Edit when the user click it, it will provide four options to Add/Delete nodes or edges.
+ 
