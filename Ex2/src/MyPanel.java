@@ -12,17 +12,17 @@ public class MyPanel extends JPanel implements MouseListener {
     private DirectedWeightedGraphAlgorithms alg;
     private int width;
     private int height;
-    private double x=0;
-    private double y=0;
+    private double x = 0;
+    private double y = 0;
 //    AffineTransform tx = new AffineTransform();
 //    Line2D.Double line = new Line2D.Double(0,0,100,100);
 //    Polygon arrowHead = new Polygon();
 
 
-    public MyPanel(DirectedWeightedGraphAlgorithms alg,int width,int height){
-        this.width=width-100;
-        this.height=height-100;
-        this.alg= alg;
+    public MyPanel(DirectedWeightedGraphAlgorithms alg, int width, int height) {
+        this.width = width - 150;
+        this.height = height - 150;
+        this.alg = alg;
 //        arrowHead.addPoint( 0,5);
 //        arrowHead.addPoint( -5, -5);
 //        arrowHead.addPoint( 5,-5);
@@ -76,50 +76,54 @@ public class MyPanel extends JPanel implements MouseListener {
         return this.width * (x - MinX(alg.getGraph().nodeIter())) / (this.MaxX(alg.getGraph().nodeIter()) - MinX(alg.getGraph().nodeIter()));
 
     }
+
     private double scaleY(double y) {
         return this.height * (MaxY(alg.getGraph().nodeIter()) - y) / (this.MaxY(alg.getGraph().nodeIter()) - MinY(alg.getGraph().nodeIter()));
     }
 
-    private double MaxX(Iterator<NodeData> iter){
-        double max=Double.MIN_VALUE;
-        double tmp=0;
-        while(iter.hasNext()){
-            tmp=iter.next().getLocation().x();
-            if(tmp>max){
-                max=tmp;
+    private double MaxX(Iterator<NodeData> iter) {
+        double max = Double.MIN_VALUE;
+        double tmp = 0;
+        while (iter.hasNext()) {
+            tmp = iter.next().getLocation().x();
+            if (tmp > max) {
+                max = tmp;
             }
         }
         return max;
     }
-    private double MinX(Iterator<NodeData> iter){
-        double min=Double.MAX_VALUE;
-        double tmp=0;
-        while(iter.hasNext()){
-            tmp=iter.next().getLocation().x();
-            if(tmp<min){
-                min=tmp;
+
+    private double MinX(Iterator<NodeData> iter) {
+        double min = Double.MAX_VALUE;
+        double tmp = 0;
+        while (iter.hasNext()) {
+            tmp = iter.next().getLocation().x();
+            if (tmp < min) {
+                min = tmp;
             }
         }
         return min;
     }
-    private double MaxY(Iterator<NodeData> iter){
-        double max=0;
-        double tmp=0;
-        while(iter.hasNext()){
-            tmp=iter.next().getLocation().y();
-            if(tmp>max){
-                max=tmp;
+
+    private double MaxY(Iterator<NodeData> iter) {
+        double max = 0;
+        double tmp = 0;
+        while (iter.hasNext()) {
+            tmp = iter.next().getLocation().y();
+            if (tmp > max) {
+                max = tmp;
             }
         }
         return max;
     }
-    private double MinY(Iterator<NodeData> iter){
-        double min=Double.MAX_VALUE;
-        double tmp=0;
-        while(iter.hasNext()){
-            tmp=iter.next().getLocation().y();
-            if(tmp<min){
-                min=tmp;
+
+    private double MinY(Iterator<NodeData> iter) {
+        double min = Double.MAX_VALUE;
+        double tmp = 0;
+        while (iter.hasNext()) {
+            tmp = iter.next().getLocation().y();
+            if (tmp < min) {
+                min = tmp;
             }
         }
         return min;
