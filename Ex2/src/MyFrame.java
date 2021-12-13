@@ -1,5 +1,4 @@
 import api.DirectedWeightedGraphAlgorithms;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -17,12 +16,15 @@ public class MyFrame extends JFrame implements ActionListener, MouseListener {
     private MenuItem isConnected;
     private MenuItem ShortestPathDist;
     private MenuItem ShortestPath;
+    private  Dimension screenSize;
     private JLabel txt;
 
+
     private void initPanel () {
-        JPanel mp = new MyPanel(alg);
-        mp.setBackground(Color.white);
+        JPanel mp = new MyPanel(alg,this.getWidth(),this.getHeight());
+        mp.setSize(400,200);
         this.add(mp);
+        mp.setVisible(true);
     }
     public MyFrame(DirectedWeightedGraphAlgorithms alg) {
         this.alg = alg;
@@ -35,7 +37,12 @@ public class MyFrame extends JFrame implements ActionListener, MouseListener {
 
     private void BuildFrame() {
         this.setTitle("Directed weighted graph Calculator");
-        this.setSize(500, 500);
+        this.setSize(1080,720);
+        this.setLocationRelativeTo(null);
+//        this.setResizable(false);
+//        SwingUtilities.getWindowAncestor(this);
+//        this.screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+//        this.setSize(screenSize.width/2+75,screenSize.height+75);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
@@ -87,14 +94,14 @@ public class MyFrame extends JFrame implements ActionListener, MouseListener {
             JOptionPane.showMessageDialog(this, b);
         }
         if (e.getSource() == Load) {
-//            try {
             JFileChooser fileChooser = new JFileChooser();
             fileChooser.setCurrentDirectory(new File("C:\\Users\\roey3\\IdeaProjects\\Ex2\\data"));
             int returnValue = fileChooser.showOpenDialog(null);
             if (returnValue == JFileChooser.APPROVE_OPTION) {
                 File selectedFile = fileChooser.getSelectedFile();
-                this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+                this.setVisible(false);
                 Ex2.runGUI(selectedFile.toString());
+
             }
         }
     }
