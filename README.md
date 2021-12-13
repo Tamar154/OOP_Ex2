@@ -19,7 +19,7 @@ classes:
     - save: saves our graph object into a json file.
     - load: reads a json file and loads it as graph.
  
- Algorithm run time tests:
+Algorithm run time tests:
  
  *Too much time
  
@@ -37,7 +37,7 @@ classes:
  
  1,000,000 nodes: Center- * , Isconnected- * , ShoretstPath- * , ShoretstPathDist- *, TSP- *.
  
-Running the program will be via Intelliji software or via CMD.
+GUI
  
 To make and design our GUI we used the swing library.
  
@@ -50,4 +50,6 @@ The second section is Algorithm when the user clicks it, it will provide five op
 Center, IsConnected, ShortestPath, ShortestPathDist and TSP.
  
 The third section and the last is the Edit when the user click it, it will provide four options to Add/Delete nodes or edges.
+ 
+Running the program will be via Intelliji software or via CMD.
  
