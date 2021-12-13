@@ -49,7 +49,7 @@ public class DirectedWeightedGraphImpl implements DirectedWeightedGraph {
 
     @Override
     public Iterator<EdgeData> edgeIter() { // **** check about runtime exception ****
-        List<EdgeData> ll = new LinkedList<>();
+        List<EdgeData> ll = new ArrayList<>();
         for (int i : Edges.keySet()) {
             for (int k : Edges.get(i).keySet()) {
                 ll.add(Edges.get(i).get(k));
@@ -64,7 +64,7 @@ public class DirectedWeightedGraphImpl implements DirectedWeightedGraph {
         HashMap<Integer, EdgeData> temp = Edges.get(node_id);
         return temp.values().iterator();
     }
-    
+
     @Override
     public NodeData removeNode(int key) {
         NodeData ans = Nodes.get(key);
