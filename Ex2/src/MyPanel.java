@@ -1,6 +1,7 @@
 import api.DirectedWeightedGraphAlgorithms;
 import api.EdgeData;
 import api.NodeData;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -13,21 +14,28 @@ public class MyPanel extends JPanel implements MouseListener {
     private int height;
     private double x=0;
     private double y=0;
+//    AffineTransform tx = new AffineTransform();
+//    Line2D.Double line = new Line2D.Double(0,0,100,100);
+//    Polygon arrowHead = new Polygon();
+
 
     public MyPanel(DirectedWeightedGraphAlgorithms alg,int width,int height){
-        this.width=width;
-        this.height=height;
+        this.width=width-100;
+        this.height=height-100;
         this.alg= alg;
+//        arrowHead.addPoint( 0,5);
+//        arrowHead.addPoint( -5, -5);
+//        arrowHead.addPoint( 5,-5);
     }
 
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponents(g);
         Graphics2D gr = (Graphics2D) g;
-        gr.setColor(Color.RED);
-//      gr.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        gr.setColor(new Color(75, 0, 130));
+        gr.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         Iterator<NodeData> iter = alg.getGraph().nodeIter();
-        while(iter.hasNext()){
+        while (iter.hasNext()) {
             NodeData temp = iter.next();
             int xPixel = (int) scaleX(temp.getLocation().x());
             int yPixel = (int) scaleY(temp.getLocation().y());
@@ -44,23 +52,32 @@ public class MyPanel extends JPanel implements MouseListener {
             double Xdst = scaleX(currTo.getLocation().x());
             double Ydst = scaleY(currTo.getLocation().y());
             g.drawLine(((int) Xsrc + 10), (int) Ysrc + 10, (int) Xdst + 10, (int) Ydst + 10);
+//            tx.setToIdentity();
+//            double angle = Math.atan2(((int) Ydst + 10) -( (int) Ysrc + 10), ((int) Xdst + 10) - ((int) Xsrc + 10));
+//            tx.translate((int) Xdst + 10, (int) Ydst + 10);
+//            tx.rotate((angle - Math.PI/ 2d));
+//            Graphics2D g2d = (Graphics2D) g.create();
+//            g2d.setTransform(tx);
+//            g2d.fill(arrowHead);
         }
-    }
-//        if(this.shortest.contains(currFrom) && this.shortest.contains(currTo)) {
-//            g.setColor(Color.GREEN);
 
-//        }
-//        }else{
-//            g.setColor(Color.RED);
-//            drawArrowLine((g), (int) xFrom+10, (int)yFrom+10,(int) xTo+10,(int) yTo+10,4,4);
-//        }
+    }
+//    private void drawArrowHead (Graphics2D g2d){
+//        tx.setToIdentity();
+//        double angle = Math.atan2(line.y2 - line.y1, line.x2 - line.x1);
+//        tx.translate(line.x2, line.y2);
+//        tx.rotate((angle - Math.PI / 2d));
+//        Graphics2D g = (Graphics2D) g2d.create();
+//        g.setTransform(tx);
+//        g.fill(arrowHead);
+//    }
 
     private double scaleX(double x) {
         return this.width * (x - MinX(alg.getGraph().nodeIter())) / (this.MaxX(alg.getGraph().nodeIter()) - MinX(alg.getGraph().nodeIter()));
 
     }
     private double scaleY(double y) {
-        return this.height * (MaxY(alg.getGraph().nodeIter()) - y) / (MaxY(alg.getGraph().nodeIter()) - MinY(alg.getGraph().nodeIter()));
+        return this.height * (MaxY(alg.getGraph().nodeIter()) - y) / (this.MaxY(alg.getGraph().nodeIter()) - MinY(alg.getGraph().nodeIter()));
     }
 
     private double MaxX(Iterator<NodeData> iter){
