@@ -1,4 +1,8 @@
 import api.DirectedWeightedGraphAlgorithms;
+import api.GeoLocationImpl;
+import api.NodeData;
+import api.NodeDataImpl;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -11,6 +15,11 @@ public class MyFrame extends JFrame implements ActionListener, MouseListener {
     private DirectedWeightedGraphAlgorithms alg;
     private MenuItem Save;
     private MenuItem Load;
+    private MenuItem Exit;
+    private MenuItem AddNode;
+    private MenuItem DeleteNode;
+    private MenuItem AddEdge;
+    private MenuItem DeleteEdge;
     private MenuItem TSP;
     private MenuItem center;
     private MenuItem isConnected;
@@ -22,9 +31,11 @@ public class MyFrame extends JFrame implements ActionListener, MouseListener {
 
     private void initPanel () {
         JPanel mp = new MyPanel(alg,this.getWidth(),this.getHeight());
-        mp.setSize(400,200);
-        this.add(mp);
         mp.setVisible(true);
+        mp.setSize(this.getPreferredSize());
+        this.add(mp);
+
+
     }
     public MyFrame(DirectedWeightedGraphAlgorithms alg) {
         this.alg = alg;
@@ -37,12 +48,9 @@ public class MyFrame extends JFrame implements ActionListener, MouseListener {
 
     private void BuildFrame() {
         this.setTitle("Directed weighted graph Calculator");
-        this.setSize(1080,720);
-        this.setLocationRelativeTo(null);
-//        this.setResizable(false);
-//        SwingUtilities.getWindowAncestor(this);
-//        this.screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-//        this.setSize(screenSize.width/2+75,screenSize.height+75);
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        setBounds(0, 0, (int) dim.getWidth(), (int) dim.getHeight());
+        setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
@@ -52,16 +60,31 @@ public class MyFrame extends JFrame implements ActionListener, MouseListener {
         menuBar.add((menu));
         Menu Algo = new Menu(("Algorithms"));
         menuBar.add((Algo));
-        Menu Draw = new Menu(("Draw"));
-        Draw.addActionListener(this);
-        menuBar.add((Draw));
+        Menu Edit = new Menu(("Edit"));
+        Edit.addActionListener(this);
+        menuBar.add((Edit));
+        AddNode = new MenuItem(("Add node"));
+        DeleteNode = new MenuItem(("Delete node"));
+        AddEdge= new MenuItem(("Add edge"));
+        DeleteEdge= new MenuItem(("Delete edge"));
+        Edit.add(AddNode);
+        Edit.add(DeleteNode);
+        Edit.add(AddEdge);
+        Edit.add(DeleteEdge);
+        AddNode.addActionListener(this);
+        DeleteNode.addActionListener(this);
+        AddEdge.addActionListener(this);
+        DeleteEdge.addActionListener(this);
         this.setMenuBar(menuBar);
         Save = new MenuItem(("Save"));
         Load = new MenuItem(("Load"));
+        Exit = new MenuItem(("Exit"));
         Save.addActionListener(this);
         Load.addActionListener(this);
+        Exit.addActionListener(this);
         menu.add(Save);
         menu.add(Load);
+        menu.add(Exit);
         TSP = new MenuItem(("TSP"));
         center = new MenuItem(("Center"));
         isConnected = new MenuItem(("isConnected"));
@@ -77,9 +100,6 @@ public class MyFrame extends JFrame implements ActionListener, MouseListener {
         Algo.add(isConnected);
         Algo.add(ShortestPathDist);
         Algo.add(ShortestPath);
-//        txt = new JLabel("The answer will be here!");
-//        txt.setBounds(0, 100, 100, 100);
-//        this.add(txt);
     }
 
     @Override
@@ -95,13 +115,81 @@ public class MyFrame extends JFrame implements ActionListener, MouseListener {
         }
         if (e.getSource() == Load) {
             JFileChooser fileChooser = new JFileChooser();
-            fileChooser.setCurrentDirectory(new File("C:\\Users\\roey3\\IdeaProjects\\Ex2\\data"));
+            fileChooser.setCurrentDirectory(new File("data\\"));
             int returnValue = fileChooser.showOpenDialog(null);
             if (returnValue == JFileChooser.APPROVE_OPTION) {
                 File selectedFile = fileChooser.getSelectedFile();
                 this.setVisible(false);
                 Ex2.runGUI(selectedFile.toString());
+                JOptionPane.showMessageDialog(this, "File loaded successfully!");
+            }
+        }
+        if (e.getSource() == Save) {
+            String name = JOptionPane.showInputDialog(this, "Enter a file name to save as:");
+            try {
+                alg.save(name + ".json");
+            } catch (Exception j) {
+                JOptionPane.showMessageDialog(this, "Operation failed! please try again.");
+            }
+            JOptionPane.showMessageDialog(this, "The file saved successfully!");
+        }
+        if (e.getSource() == Exit) {
+            this.dispose();
+        }
+        if (e.getSource() == AddNode) {
+            try {
+                String Point = JOptionPane.showInputDialog(this, "Enter point x,y,z:");
+                String Key = JOptionPane.showInputDialog(this, "Enter key:");
+                GeoLocationImpl Mypoint = new GeoLocationImpl(Point);
+                int MyKey = Integer.parseInt(Key);
+                NodeData node = new NodeDataImpl(Mypoint, MyKey);
+                alg.getGraph().addNode(node);
+                JOptionPane.showMessageDialog(this, "Operation Succeed!");
+                repaint();
+            } catch (Exception c) {
+                JOptionPane.showMessageDialog(this, "Operation failed! please try again.");
+            }
 
+        }
+        if (e.getSource() == DeleteNode) {
+            String key = JOptionPane.showInputDialog(this, "Enter a key of a node you want to remove");
+            int remove = Integer.parseInt(key);
+            NodeData n = alg.getGraph().removeNode(remove);
+            if (n == null) {
+                JOptionPane.showMessageDialog(this, "No such key! try again.");
+            }else
+            {
+                repaint();
+                    JOptionPane.showMessageDialog(this, "Operation Succeed!");
+
+            }
+        }
+        if(e.getSource()==AddEdge){
+            String Source=JOptionPane.showInputDialog(this,"Enter a source:");
+            String Destination=JOptionPane.showInputDialog(this,"Enter a destination:");
+            String Weight=JOptionPane.showInputDialog(this,"Enter a weight:");
+            int src=Integer.parseInt(Source);
+            int dst=Integer.parseInt(Destination);
+            int W=Integer.parseInt(Weight);
+            try{
+                alg.getGraph().connect(src, dst, W);
+                repaint();
+                JOptionPane.showMessageDialog(this, "Operation Succeed!");
+            }catch(Exception c){
+                JOptionPane.showMessageDialog(this, "Operation failed! try again.");
+            }
+        }
+        if(e.getSource()==DeleteEdge){
+            String Source=JOptionPane.showInputDialog(this,"Enter a source:");
+            String Destination=JOptionPane.showInputDialog(this,"Enter a destination:");
+            int src=Integer.parseInt(Source);
+            int dst=Integer.parseInt(Destination);
+            try{
+                alg.getGraph().removeEdge(src, dst);
+                repaint();
+                JOptionPane.showMessageDialog(this, "Operation Succeed!");
+            }catch(Exception c){
+                JOptionPane.showMessageDialog(this, "Operation failed! try again.");
             }
         }
     }
