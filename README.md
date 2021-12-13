@@ -1,6 +1,6 @@
 # OOP_Ex2
 
-this project is about directed weighted graph.
+This project is about directed weighted graph.
 
 classes: 
   * GeoLocation: represents a point in a plane <x,y,z>
@@ -37,7 +37,7 @@ Algorithm run time tests:
  
  1,000,000 nodes: Center- * , Isconnected- * , ShoretstPath- * , ShoretstPathDist- *, TSP- *.
  
-GUI
+GUI:
  
 To make and design our GUI we used the swing library.
  
