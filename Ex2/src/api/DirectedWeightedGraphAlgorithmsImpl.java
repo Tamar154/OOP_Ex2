@@ -20,7 +20,7 @@ public class DirectedWeightedGraphAlgorithmsImpl implements DirectedWeightedGrap
 
     @Override
     public void init(DirectedWeightedGraph g) {
-        g = new DirectedWeightedGraphImpl();
+        this.g = (DirectedWeightedGraphImpl) g;
     }
 
 
@@ -74,6 +74,7 @@ public class DirectedWeightedGraphAlgorithmsImpl implements DirectedWeightedGrap
         return true;
     }
 
+
     private void DFS(List<List<Integer>> adjList, int v, boolean[] visited) {
         visited[v] = true;
         for (int u : adjList.get(v)) {
@@ -122,7 +123,7 @@ public class DirectedWeightedGraphAlgorithmsImpl implements DirectedWeightedGrap
             }
         }
 
-//        Floyd:
+//        Floyd Warshall Algorithm:
         for (int k = 0; k < n; k++) {
             for (int i = 0; i < n; i++) {
                 for (int j = 0; j < n; j++) {
@@ -203,12 +204,13 @@ public class DirectedWeightedGraphAlgorithmsImpl implements DirectedWeightedGrap
         double[][] mat = floydWarshallAlgorithm();
         int counter = 0;
         int j = 0, i = 0;
+        int n = cities.size();
         double min = Double.MAX_VALUE;
         List<NodeData> visited = new ArrayList<>();
         visited.add(cities.get(0));
         int[] route = new int[mat.length];
-        while (i < mat.length && j < mat[i].length) {
-            if (counter >= mat[i].length - 1) {
+        while (i < n && j < n) {
+            if (counter >= n - 1) {
                 break;
             }
             if (j != i && !(visited.contains(cities.get(j)))) {
@@ -218,7 +220,7 @@ public class DirectedWeightedGraphAlgorithmsImpl implements DirectedWeightedGrap
                 }
             }
             j++;
-            if (j == mat[i].length) {
+            if (j == n) {
                 min = Integer.MAX_VALUE;
                 visited.add(cities.get(route[counter] - 1));
                 j = 0;
@@ -226,7 +228,7 @@ public class DirectedWeightedGraphAlgorithmsImpl implements DirectedWeightedGrap
                 counter++;
             }
         }
-        for (j = 0; j < mat.length; j++) {
+        for (j = 0; j < n; j++) {
             if ((i != j) && mat[i][j] < min) {
                 min = mat[i][j];
                 route[counter] = j + 1;
@@ -301,4 +303,5 @@ public class DirectedWeightedGraphAlgorithmsImpl implements DirectedWeightedGrap
         }
         return false;
     }
+
 }
