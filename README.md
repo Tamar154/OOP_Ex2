@@ -31,9 +31,9 @@ classes:
  
  1,000 nodes: Center-3447ms, Isconnected-12ms, ShoretstPath-3769ms, ShoretstPathDist-3350ms, TSP-4128ms.
  
- 10,000 nodes: Center- *, Isconnected-23550ms, ShoretstPath-*, ShoretstPathDist-*, TSP-*.
+ 10,000 nodes: Center-*, Isconnected-23550ms, ShoretstPath-*, ShoretstPathDist-*, TSP-*.
  
- 100,000 nodes: Center- *, Isconnected-*, ShoretstPath-*, ShoretstPathDist-*, TSP-*.
+ 100,000 nodes: Center-*, Isconnected-*, ShoretstPath-*, ShoretstPathDist-*, TSP-*.
  
- 1,000,000 nodes: Center- *, Isconnected-*, ShoretstPath-*, ShoretstPathDist-*, TSP-*.
+ 1,000,000 nodes: Center-*, Isconnected-*, ShoretstPath-*, ShoretstPathDist-*, TSP-*.
  
